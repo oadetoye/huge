@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>My HUGE Task</title>
+    <link href="main.css" rel="stylesheet" type="text/css" media="screen" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
+</head>
+
+<body>
+  <div id="header">
+    <div id="logo">
+      <hi><a href="/"><img src="/images/logo.png" alt="My HUGE Task" /></a>
+    </div>
+    <div id="menu-button">
+      <a href="#"><img src="images/menu.png"></a>
+    </div>
+    <div id="navbar">
+      <div id="search-panel">
+        <input type="text" name="search" id="search" />
+        <button id="search-button">Go</button>
+      </div>
+      <ul>
+        <li>
+          <a href="#">Menu 1</a>
+        </li>
+        <li>
+          <a href="#">Menu 2</a>
+        </li>
+        <li>
+          <a href="#">Menu 3</a>
+        </li>
+        <li>
+          <a href="#">Menu 4</a>
+        </li>
+        <li>
+          <a href="#">Menu 5</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div id="content">
+    <div id="slideshow" class="hisrc">
+      <img src="images/carousel.jpg" class='responsive' />
+    </div>
+    <div class="panel col-4">
+      <h2>First Column</h3>
+      <div class="panel-content">
+        <img src="/images/first.jpg" alt="First Column Image" />
+         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tortor velit, sagittis id ligula at, ultrices dapibus lorem. Donec egestas nulla risus, sit amet blandit nisl interdum pharetra. Cras viverra erat a augue pellentesque pretium. Mauris id elementum sem.
+      </div>
+      <a class="button" href="#" title="Learn more about First Column">Learn more</a>
+    </div>
+    <div class="panel col-4">
+      <h2>Second Column</h3>
+      <div class="panel-content">
+        <img src="/images/second.jpg" alt="Second Column Image" />
+         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tortor velit, sagittis id ligula at, ultrices dapibus lorem. Donec egestas nulla risus, sit amet blandit nisl interdum pharetra. Cras viverra erat a augue pellentesque pretium. Mauris id elementum sem.
+      </div>
+      <a class="button" href="#" title="Learn more about Second Column">Learn more</a>
+    </div>
+    <div class="panel col-4">
+      <h2>Third Column</h3>
+      <div class="panel-content">
+        <img src="/images/third.jpg" alt="Third Column Image" />
+         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tortor velit, sagittis id ligula at, ultrices dapibus lorem. Donec egestas nulla risus, sit amet blandit nisl interdum pharetra. Cras viverra erat a augue pellentesque pretium. Mauris id elementum sem.
+      </div>
+      <a class="button" href="#" title="Learn more about Third Column">Learn more</a>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+  <script language="javascript">
+    $(function() {
+
+      $('#menu-button').on('click', function() {
+        $('#navbar').slideToggle('medium');
+      });
+
+      //Initialize responsive images
+      var initResponsiveImages = function() {
+        var sWidth = document.body.clientWidth;
+        $('img.responsive').each(function() {
+          var src = $(this).data('image') || $(this).attr('src');
+          var img = src.split('images/')[1];
+          $(this).data('image', src);
+          var size = '';
+          if(sWidth <= 768) {
+            size = '768/';
+          }
+          else if(sWidth > 768 && sWidth <= 1024) {
+            size = '1024/';
+          }
+
+          $(this).attr('src', 'images/' + size + img);
+          console.log(sWidth);
+          console.log(size);
+        });
+      };
+
+      initResponsiveImages();
+
+      var t;
+      $(window).on('resize', function() {
+        clearTimeout(t);
+        //Fix for firefox since event fires on pretty much every pixel
+        t = setTimeout(function() {
+          initResponsiveImages();
+        }, 200);
+      });
+    });
+  </script>
+</body>
+</html>
